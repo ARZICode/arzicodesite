@@ -6,7 +6,7 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:5174', // Included your current frontend port
-  'https://arzicode-platform.vercel.app'
+  'https://arzicodesite.vercel.app'
 ];
 
 app.use(cors({
