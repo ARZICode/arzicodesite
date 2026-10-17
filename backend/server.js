@@ -29,7 +29,21 @@ const userRoutes = require('./routes/userRoutes');
 
 app.use('/api/admin', adminRoutes);
 app.use('/api/user', userRoutes);
-https://api.render.com/deploy/srv-db9toucs728c73d0jk70?key=gt1isIDDyrw
+const pool = require('./config/db');
+app.get('/api/debug-db', async (req, res) => {
+  try {
+    const info = await pool.query('SELECT current_database() AS db, current_schema() AS schema, inet_server_addr() AS addr');
+    const tables = await pool.query("SELECT table_schema, table_name FROM information_schema.tables WHERE table_schema NOT IN ('pg_catalog','information_schema')");
+    const counts = {};
+    for (const t of ['services', 'reviews', 'case_studies']) {
+      try { counts[t] = (await pool.query(`SELECT count(*) FROM ${t}`)).rows[0].count; }
+      catch (e) { counts[t] = 'ERR: ' + e.message; }
+    }
+    res.json({ host: new URL(process.env.DATABASE_URL).host, info: info.rows[0], counts, tables: tables.rows });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
