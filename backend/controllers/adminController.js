@@ -1,5 +1,11 @@
 const pool = require('../config/db');
 
+// Helper to convert multer memory buffer to Base64 data URL
+const formatBase64 = (file) => {
+  if (!file) return null;
+  return `data:${file.mimetype};base64,${file.buffer.toString('base64')}`;
+};
+
 // Services
 exports.getAllServices = async (req, res) => {
   try {
@@ -15,7 +21,7 @@ exports.addService = async (req, res) => {
   const { id, badge, title, price, description, action_text, what_you_get, ideal_for } = req.body;
   const whatYouGetArray = Array.isArray(what_you_get) ? what_you_get : (what_you_get ? what_you_get.split(',').map(s => s.trim()) : []);
   const idealForArray = Array.isArray(ideal_for) ? ideal_for : (ideal_for ? ideal_for.split(',').map(s => s.trim()) : []);
-  const image_url = req.file ? `/uploads/${req.file.filename}` : '';
+  const image_url = req.file ? formatBase64(req.file) : '';
 
   try {
     const query = `
@@ -39,21 +45,27 @@ exports.editService = async (req, res) => {
   const idealForArray = Array.isArray(ideal_for) ? ideal_for : (ideal_for ? ideal_for.split(',').map(s => s.trim()) : []);
 
   try {
-    let query, values;
+    const existing = await pool.query('SELECT image_url FROM services WHERE id = $1', [id]);
+    if (existing.rows.length === 0) return res.status(404).json({ error: 'Service not found' });
+
+    let image_url = existing.rows[0].image_url;
     if (req.file) {
-      const image_url = `/uploads/${req.file.filename}`;
-      query = `UPDATE services SET badge = $1, title = $2, price = $3, description = $4, action_text = $5, image_url = $6, what_you_get = $7, ideal_for = $8 WHERE id = $9 RETURNING *;`;
-      values = [badge, title, price, description, action_text, image_url, whatYouGetArray, idealForArray, id];
-    } else {
-      query = `UPDATE services SET badge = $1, title = $2, price = $3, description = $4, action_text = $5, what_you_get = $6, ideal_for = $7 WHERE id = $8 RETURNING *;`;
-      values = [badge, title, price, description, action_text, whatYouGetArray, idealForArray, id];
+      image_url = formatBase64(req.file);
     }
+
+    const query = `
+      UPDATE services 
+      SET badge = $1, title = $2, price = $3, description = $4, action_text = $5, image_url = $6, what_you_get = $7, ideal_for = $8 
+      WHERE id = $9 
+      RETURNING *;
+    `;
+    const values = [badge, title, price, description, action_text, image_url, whatYouGetArray, idealForArray, id];
+    
     const result = await pool.query(query, values);
-    if (result.rows.length === 0) return res.status(404).json({ error: 'Service not found' });
     res.json({ message: 'Service updated successfully', service: result.rows[0] });
   } catch (err) {
     console.error('Error updating service:', err.message);
-    res.status(500).json({ error: 'Database error updating service' });
+    res.status(500).json({ error: 'Database error updating service: ' + err.message });
   }
 };
 
@@ -131,14 +143,18 @@ exports.getAllCaseStudies = async (req, res) => {
 
 exports.addCaseStudy = async (req, res) => {
   const { id, title, client_name, category, description, results_summary, project_url, is_visible } = req.body;
-  const image_url = req.file ? `/uploads/${req.file.filename}` : '';
+  const image_url = req.file ? formatBase64(req.file) : '';
   try {
-    const query = `INSERT INTO case_studies (id, title, client_name, category, description, results_summary, image_url, project_url, is_visible, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, NOW()) RETURNING *;`;
+    const query = `
+      INSERT INTO case_studies (id, title, client_name, category, description, results_summary, image_url, project_url, is_visible, created_at) 
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, NOW()) 
+      RETURNING *;
+    `;
     const result = await pool.query(query, [id, title, client_name, category, description, results_summary, image_url, project_url, is_visible !== undefined ? is_visible : true]);
     res.status(201).json({ message: 'Case study created successfully', caseStudy: result.rows[0] });
   } catch (err) {
     console.error('Error adding case study:', err.message);
-    res.status(500).json({ error: 'Database error creating case study' });
+    res.status(500).json({ error: 'Database error creating case study: ' + err.message });
   }
 };
 
@@ -146,21 +162,27 @@ exports.editCaseStudy = async (req, res) => {
   const { id } = req.params;
   const { title, client_name, category, description, results_summary, project_url, is_visible } = req.body;
   try {
-    let query, values;
+    const existing = await pool.query('SELECT image_url FROM case_studies WHERE id = $1', [id]);
+    if (existing.rows.length === 0) return res.status(404).json({ error: 'Case study not found' });
+
+    let image_url = existing.rows[0].image_url;
     if (req.file) {
-      const image_url = `/uploads/${req.file.filename}`;
-      query = `UPDATE case_studies SET title = $1, client_name = $2, category = $3, description = $4, results_summary = $5, image_url = $6, project_url = $7, is_visible = $8 WHERE id = $9 RETURNING *;`;
-      values = [title, client_name, category, description, results_summary, image_url, project_url, is_visible, id];
-    } else {
-      query = `UPDATE case_studies SET title = $1, client_name = $2, category = $3, description = $4, results_summary = $5, project_url = $6, is_visible = $7 WHERE id = $8 RETURNING *;`;
-      values = [title, client_name, category, description, results_summary, project_url, is_visible, id];
+      image_url = formatBase64(req.file);
     }
+
+    const query = `
+      UPDATE case_studies 
+      SET title = $1, client_name = $2, category = $3, description = $4, results_summary = $5, image_url = $6, project_url = $7, is_visible = $8 
+      WHERE id = $9 
+      RETURNING *;
+    `;
+    const values = [title, client_name, category, description, results_summary, image_url, project_url, is_visible, id];
+    
     const result = await pool.query(query, values);
-    if (result.rows.length === 0) return res.status(404).json({ error: 'Case study not found' });
     res.json({ message: 'Case study updated successfully', caseStudy: result.rows[0] });
   } catch (err) {
     console.error('Error updating case study:', err.message);
-    res.status(500).json({ error: 'Database error updating case study' });
+    res.status(500).json({ error: 'Database error updating case study: ' + err.message });
   }
 };
 
