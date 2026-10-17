@@ -33,11 +33,4 @@ app.use('/api/user', userRoutes);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-app.get('/api/debug-db', async (req, res) => {
-  const url = new URL(process.env.DATABASE_URL);
-  const r = await pool.query('SELECT count(*) FROM reviews'); // use your ORM equivalent
-  res.json({ host: url.host, db: url.pathname, env: process.env.NODE_ENV, count: r.rows[0].count });
 });
-}
-)
-;
