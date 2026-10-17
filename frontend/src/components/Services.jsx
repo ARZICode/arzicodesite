@@ -57,37 +57,24 @@ export default function Services() {
         {!loading && !error && services.length > 0 && (
           <div className="services-grid">
             {services.map((service) => (
-              <div className="service-card" key={service.id}>
-                {service.image_url && (
-                  <div className="service-image-wrapper">
-                    <img src={`${API_BASE_URL.replace('/api', '')}${service.image_url}`} alt={service.title} />
-                  </div>
-                )}
-                <div className="service-content">
-                  <span className="service-badge">{service.badge || 'SOLUTION'}</span>
-                  <h3>{service.title}</h3>
-                  <p className="service-desc">{service.description}</p>
-                  
-                  {service.price && <div className="service-price">{service.price}</div>}
+              <div className="service-card">
+  {/* Render the image if image_url exists */}
+  {service.image_url ? (
+    <img 
+      src={service.image_url} 
+      alt={service.title} 
+      className="service-card-image" 
+    />
+  ) : (
+    <div className="service-image-placeholder">No Image</div>
+  )}
 
-                  {service.ideal_for && service.ideal_for.length > 0 && (
-                    <div className="service-tags">
-                      <strong>Ideal for:</strong>
-                      <div className="tag-list">
-                        {(Array.isArray(service.ideal_for) ? service.ideal_for : [service.ideal_for]).map((item, i) => (
-                          <span key={i} className="tag">{item}</span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  <div className="service-footer">
-                    <a href="#contact" className="service-action-btn">
-                      {service.action_text || "Let's Talk"} →
-                    </a>
-                  </div>
-                </div>
-              </div>
+  <span className="service-badge">{service.badge}</span>
+  <h3>{service.title}</h3>
+  <p>{service.description}</p>
+  <div className="service-price">{service.price}</div>
+  <button className="btn-action">{service.action_text}</button>
+</div>
             ))}
           </div>
         )}

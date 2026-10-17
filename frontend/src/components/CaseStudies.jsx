@@ -58,10 +58,12 @@ export default function CaseStudies() {
           <div className="case-studies-grid">
             {projects.map((project) => (
               <div className="project-card" key={project.id}>
-                {project.image_url && (
+                {project.image_url ? (
                   <div className="project-image">
-                    <img src={`${API_BASE_URL.replace('/api', '')}${project.image_url}`} alt={project.title} />
+                    <img src={project.image_url} alt={project.title} />
                   </div>
+                ) : (
+                  <div className="project-image-placeholder">No Image</div>
                 )}
                 <div className="project-info">
                   <div className="project-meta">
