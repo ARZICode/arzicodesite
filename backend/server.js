@@ -29,8 +29,10 @@ const userRoutes = require('./routes/userRoutes');
 
 app.use('/api/admin', adminRoutes);
 app.use('/api/user', userRoutes);
-
+https://api.render.com/deploy/srv-db9toucs728c73d0jk70?key=gt1isIDDyrw
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+
+  
 });
