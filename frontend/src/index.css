@@ -1,0 +1,36 @@
+:root {
+  --color-light-sage: #E2EAD6;
+  --color-muted-sage: #A7BFA6;
+  --color-cedar: #4F7A5B;
+  --color-forest: #2E5B3F;
+  --color-deep-forest: #1B3D2A;
+  --color-almost-black: #0D2016;
+  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-light-sage);
+  color: var(--color-almost-black);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}

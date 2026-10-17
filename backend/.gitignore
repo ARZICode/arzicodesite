@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+
+# Environment variables (Crucial for security!)
+.env
+.env.local
+
+# Local uploads folder (images uploaded locally)
+uploads/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

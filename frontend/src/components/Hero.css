@@ -1,0 +1,149 @@
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 8rem 2rem 4rem 2rem;
+  background: linear-gradient(135deg, var(--color-light-sage) 0%, rgba(167, 191, 166, 0.3) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 4rem;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-badge {
+  display: inline-block;
+  background-color: rgba(79, 122, 91, 0.12);
+  border: 1px solid rgba(79, 122, 91, 0.25);
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-forest);
+  margin-bottom: 1.5rem;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--color-almost-black);
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+  letter-spacing: -1px;
+}
+
+.hero-content h1 span {
+  color: var(--color-cedar);
+  position: relative;
+}
+
+.hero-content p {
+  font-size: 1.15rem;
+  color: var(--color-deep-forest);
+  margin-bottom: 2.5rem;
+  max-width: 540px;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-primary {
+  background-color: var(--color-cedar);
+  color: var(--color-light-sage);
+  padding: 0.85rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(79, 122, 91, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-forest);
+  transform: translateY(-2px);
+}
+.canvas-wrapper {
+  width: 100%;
+  height: 480px;
+  position: relative;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.canvas-wrapper canvas {
+  width: 100% !important;
+  height: 100% !important;
+  background: transparent !important;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-deep-forest);
+  border: 2px solid rgba(46, 91, 63, 0.3);
+  padding: 0.85rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-cedar);
+  background-color: rgba(79, 122, 91, 0.05);
+}
+
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
+
+.cedar-caption {
+  position: absolute;
+  bottom: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-forest);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  background: rgba(226, 234, 214, 0.85);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+@media (max-width: 968px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 3rem;
+  }
+  .hero-content p {
+    margin: 0 auto 2.5rem auto;
+  }
+  .hero-actions {
+    justify-content: center;
+  }
+  .hero-content h1 {
+    font-size: 2.7rem;
+  }
+  .canvas-wrapper {
+    height: 380px;
+  }
+}

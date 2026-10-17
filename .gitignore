@@ -1,0 +1,18 @@
+# Ignore node_modules in root or subfolders
+node_modules/
+**/node_modules/
+
+# Environment files
+.env
+**/.env
+
+# Build outputs
+**/dist/
+**/build/
+
+# Local uploads
+**/uploads/
+
+# OS generated files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,115 @@
+.case-studies-section {
+  padding: 6rem 2rem;
+  background-color: var(--color-light-sage);
+}
+
+.case-studies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2.5rem;
+}
+
+.project-card {
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(79, 122, 91, 0.15);
+  box-shadow: 0 10px 30px rgba(13, 32, 22, 0.04);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(79, 122, 91, 0.1);
+}
+
+.project-image {
+  width: 100%;
+  overflow: hidden;
+  background: var(--color-light-sage);
+}
+
+.project-image img {
+  width: 100%;
+  height: auto; /* Lets the image scale naturally without cropping or squeezing */
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-image img {
+  transform: scale(1.05);
+}
+
+.project-info {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.project-category {
+  background: rgba(79, 122, 91, 0.12);
+  color: var(--color-forest);
+  padding: 0.25rem 0.7rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.project-client {
+  font-size: 0.85rem;
+  color: var(--color-cedar);
+  font-weight: 600;
+}
+
+.project-info h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-deep-forest);
+  margin-bottom: 0.8rem;
+}
+
+.project-info p {
+  font-size: 0.95rem;
+  color: var(--color-almost-black);
+  opacity: 0.85;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.results-box {
+  background: rgba(226, 234, 214, 0.6);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 3px solid var(--color-cedar);
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.results-box strong {
+  display: block;
+  color: var(--color-deep-forest);
+  margin-bottom: 0.2rem;
+}
+
+.project-link {
+  margin-top: auto;
+  font-weight: 600;
+  color: var(--color-cedar);
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.project-link:hover {
+  color: var(--color-forest);
+}

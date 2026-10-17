@@ -1,0 +1,113 @@
+.reviews-section {
+  padding: 6rem 0;
+  background-color: #FFFFFF;
+  border-top: 1px solid rgba(79, 122, 91, 0.15);
+  border-bottom: 1px solid rgba(79, 122, 91, 0.15);
+  overflow: hidden;
+}
+
+.reviews-section .section-container {
+  padding: 0 2rem;
+  margin-bottom: 3rem;
+}
+
+.reviews-marquee-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+}
+
+/* Gradient fade edges for smooth entrance/exit */
+.reviews-marquee-container::before,
+.reviews-marquee-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.reviews-marquee-container::before {
+  left: 0;
+  background: linear-gradient(to right, #FFFFFF, transparent);
+}
+
+.reviews-marquee-container::after {
+  right: 0;
+  background: linear-gradient(to left, #FFFFFF, transparent);
+}
+
+.reviews-track {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  animation: scrollMarquee 35s linear infinite;
+}
+
+.reviews-track:hover {
+  animation-play-state: paused; /* Pause auto-scroll on hover to read */
+}
+
+@keyframes scrollMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.review-card {
+  width: 380px;
+  flex-shrink: 0;
+  background-color: var(--color-light-sage);
+  padding: 2.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(79, 122, 91, 0.2);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(13, 32, 22, 0.03);
+}
+
+.review-quote-icon {
+  font-size: 3rem;
+  color: var(--color-cedar);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  opacity: 0.5;
+}
+
+.review-text {
+  font-size: 1.05rem;
+  color: var(--color-deep-forest);
+  margin-bottom: 2rem;
+  line-height: 1.7;
+  font-style: italic;
+  flex-grow: 1;
+}
+
+.review-author h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-almost-black);
+}
+
+.review-author p {
+  font-size: 0.85rem;
+  color: var(--color-cedar);
+  font-weight: 600;
+  margin-top: 0.2rem;
+}
+
+@media (max-width: 768px) {
+  .review-card {
+    width: 300px;
+  }
+  .reviews-track {
+    animation-duration: 25s;
+  }
+}
