@@ -57,24 +57,41 @@ export default function Services() {
         {!loading && !error && services.length > 0 && (
           <div className="services-grid">
             {services.map((service) => (
-              <div className="service-card">
-  {/* Render the image if image_url exists */}
-  {service.image_url ? (
-    <img 
-      src={service.image_url} 
-      alt={service.title} 
-      className="service-card-image" 
-    />
-  ) : (
-    <div className="service-image-placeholder">No Image</div>
-  )}
+              <div className="service-card" key={service.id}>
+                {service.image_url ? (
+                  <div className="service-image-wrapper">
+                    <img src={service.image_url} alt={service.title} />
+                  </div>
+                ) : (
+                  <div className="service-image-wrapper" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#666' }}>
+                    <span>No Image</span>
+                  </div>
+                )}
 
-  <span className="service-badge">{service.badge}</span>
-  <h3>{service.title}</h3>
-  <p>{service.description}</p>
-  <div className="service-price">{service.price}</div>
-  <button className="btn-action">{service.action_text}</button>
-</div>
+                <div className="service-content">
+                  <span className="service-badge">{service.badge}</span>
+                  <h3>{service.title}</h3>
+                  <p className="service-desc">{service.description}</p>
+                  <div className="service-price">{service.price}</div>
+
+                  {service.what_you_get && service.what_you_get.length > 0 && (
+                    <div className="service-tags">
+                      <strong>What You Get:</strong>
+                      <div className="tag-list">
+                        {service.what_you_get.map((item, idx) => (
+                          <span className="tag" key={idx}>{item}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="service-footer">
+                    <button className="service-action-btn" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                      {service.action_text || 'Get Started'} ↗
+                    </button>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         )}
