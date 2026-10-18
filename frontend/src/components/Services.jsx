@@ -85,10 +85,10 @@ export default function Services() {
                     </div>
                   )}
 
-                  <div className="service-footer">
-                    <button className="service-action-btn" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
-                      {service.action_text || 'Get Started'} ↗
-                    </button>
+                  <div className="service-action-btn">
+                   <a href="#contact" className="service-action-btn">
+  {service.action_text || 'Get Started'} ↗
+</a>
                   </div>
                 </div>
               </div>
