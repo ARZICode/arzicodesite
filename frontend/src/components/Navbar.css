@@ -12,6 +12,7 @@
 .navbar.scrolled {
   background-color: rgba(226, 234, 214, 0.92);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 4px 20px rgba(13, 32, 22, 0.06);
   padding: 0.9rem 2rem;
   border-bottom: 1px solid rgba(79, 122, 91, 0.15);
@@ -107,9 +108,23 @@
   transition: 0.3s;
 }
 
+/* Hamburger turns into an X when open */
+.mobile-menu-toggle.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.mobile-menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+.mobile-menu-toggle.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
 @media (max-width: 900px) {
   .navbar {
     padding: 1rem;
+  }
+  .navbar.scrolled {
+    padding: 0.8rem 1rem;
   }
   .btn-primary-nav {
     display: none;
@@ -118,8 +133,10 @@
     display: flex;
   }
   .navbar-links {
-    position: fixed;
-    top: 72px;
+    /* absolute + top:100% sticks the menu under the navbar in both states
+       (a fixed child breaks once the navbar has backdrop-filter) */
+    position: absolute;
+    top: 100%;
     left: 0;
     width: 100%;
     background-color: var(--color-light-sage);
@@ -129,11 +146,15 @@
     gap: 1.8rem;
     box-shadow: 0 10px 25px rgba(13, 32, 22, 0.1);
     transform: translateY(-150%);
-    transition: transform 0.3s ease;
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.3s ease, visibility 0.3s;
     border-bottom: 1px solid rgba(79, 122, 91, 0.2);
   }
   .navbar-links.open {
     transform: translateY(0);
+    visibility: visible;
+    pointer-events: auto;
   }
   .nav-cta-mobile {
     display: block;
@@ -142,5 +163,11 @@
     padding: 0.7rem 2.2rem;
     border-radius: 6px;
     margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .navbar-logo {
+    font-size: 1.3rem;
   }
 }

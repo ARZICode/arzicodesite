@@ -7,9 +7,13 @@
 
 .contact-grid {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
   gap: 4rem;
   align-items: center;
+}
+
+.contact-grid > * {
+  min-width: 0;
 }
 
 .contact-badge {
@@ -30,6 +34,7 @@
   margin-bottom: 1.2rem;
   letter-spacing: -0.5px;
   line-height: 1.2;
+  overflow-wrap: break-word;
 }
 
 .contact-info > p {
@@ -59,6 +64,7 @@
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--color-deep-forest);
+  overflow-wrap: anywhere;
 }
 
 .contact-item a:hover {
@@ -99,10 +105,15 @@
   border: 1px solid rgba(79, 122, 91, 0.3);
   border-radius: 8px;
   font-family: inherit;
+  /* 16px minimum stops iOS/Android from zooming the page when a field is focused */
   font-size: 1rem;
   background-color: rgba(226, 234, 214, 0.15);
   color: var(--color-almost-black);
   transition: all 0.2s ease;
+}
+
+.form-group textarea {
+  resize: vertical;
 }
 
 .form-group input:focus, .form-group textarea:focus {
@@ -143,7 +154,7 @@
 
 @media (max-width: 968px) {
   .contact-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 3rem;
   }
   .contact-info h2 {
@@ -151,5 +162,18 @@
   }
   .contact-form-wrapper {
     padding: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-section {
+    padding: 4.5rem 1.25rem;
+  }
+  .contact-info h2 {
+    font-size: 2rem;
+  }
+  .contact-form-wrapper {
+    padding: 1.5rem 1.25rem;
+    border-radius: 16px;
   }
 }

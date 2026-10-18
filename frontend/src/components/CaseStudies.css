@@ -5,8 +5,14 @@
 
 .case-studies-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  /* min(100%, 350px) is the fix: a plain minmax(350px, 1fr) forces a 350px
+     column, which is wider than the content area on most phones */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
   gap: 2.5rem;
+}
+
+.case-studies-grid > * {
+  min-width: 0;
 }
 
 .project-card {
@@ -47,10 +53,13 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  min-width: 0;
 }
 
 .project-meta {
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
@@ -77,6 +86,7 @@
   font-weight: 700;
   color: var(--color-deep-forest);
   margin-bottom: 0.8rem;
+  overflow-wrap: break-word;
 }
 
 .project-info p {
@@ -85,6 +95,7 @@
   opacity: 0.85;
   margin-bottom: 1.5rem;
   line-height: 1.6;
+  overflow-wrap: break-word;
 }
 
 .results-box {
@@ -102,6 +113,10 @@
   margin-bottom: 0.2rem;
 }
 
+.results-box p {
+  margin-bottom: 0;
+}
+
 .project-link {
   margin-top: auto;
   font-weight: 600;
@@ -112,4 +127,16 @@
 
 .project-link:hover {
   color: var(--color-forest);
+}
+
+@media (max-width: 600px) {
+  .case-studies-section {
+    padding: 4rem 1.25rem;
+  }
+  .case-studies-grid {
+    gap: 1.75rem;
+  }
+  .project-info {
+    padding: 1.5rem;
+  }
 }
