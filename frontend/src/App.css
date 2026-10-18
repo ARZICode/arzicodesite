@@ -702,3 +702,120 @@ body {
 /* CONTACT */
 .contact-section {
   padding: 6rem 0;
+}
+/* ==================== MOBILE RESPONSIVE ENHANCEMENTS ==================== */
+
+@media (max-width: 768px) {
+  /* Prevent horizontal overflow across all mobile screens */
+  body, html {
+    overflow-x: hidden;
+  }
+
+  /* Adjust global container padding for tighter mobile layout */
+  .container {
+    padding: 0 1.25rem;
+  }
+
+  /* Navbar Adjustments */
+  .nav-container {
+    height: 70px;
+    padding: 0 1.25rem;
+  }
+
+  .nav-logo {
+    font-size: 1.25rem;
+  }
+
+  /* Hero Section Mobile Optimization */
+  .hero-section {
+    padding: 2rem 0 3rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2.25rem;
+    line-height: 1.15;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    justify-content: center;
+    padding: 0.875rem 1.5rem;
+  }
+
+  /* Scale down 3D Cedar Canvas height on mobile for better ergonomics */
+  .cedar-canvas-container {
+    height: 320px;
+  }
+
+  .cedar-card {
+    padding: 1rem;
+    border-radius: 1.25rem;
+  }
+
+  /* Section Spacing Adjustments */
+  .why-us-section,
+  .services-section,
+  .case-studies-section,
+  .reviews-section,
+  .contact-section {
+    padding: 4rem 0;
+  }
+
+  .section-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.85rem;
+  }
+
+  /* Cards & Grids Stack Optimization */
+  .grid-3, .grid-2, .why-grid {
+    gap: 1.5rem;
+  }
+
+  .service-card, .why-card, .review-card {
+    padding: 1.5rem;
+  }
+
+  /* Contact Form Mobile Padding */
+  .contact-form-card {
+    padding: 1.75rem 1.25rem;
+  }
+
+  /* Mobile Dropdown Menu Animation */
+  .mobile-dropdown {
+    animation: slideDown 0.25s ease-out forwards;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Extra small devices (iPhone SE / older phones) */
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .cedar-canvas-container {
+    height: 280px;
+  }
+}
