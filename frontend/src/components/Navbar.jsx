@@ -26,11 +26,9 @@ export default function Navbar() {
           <a href="#case-studies" onClick={() => setMobileMenuOpen(false)}>Case Studies</a>
           <a href="#reviews" onClick={() => setMobileMenuOpen(false)}>Reviews</a>
           <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact Us</a>
-          <a href="#contact" className="nav-cta-mobile" onClick={() => setMobileMenuOpen(false)}>Let's Talk</a>
         </nav>
 
         <div className="navbar-actions">
-          <a href="#contact" className="btn-primary-nav">Let's Talk</a>
           <button 
             className={`mobile-menu-toggle ${mobileMenuOpen ? 'active' : ''}`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

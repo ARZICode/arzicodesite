@@ -10,7 +10,7 @@
 }
 
 .navbar.scrolled {
-  background-color: rgba(226, 234, 214, 0.92);
+  background-color: rgba(226, 234, 214, 0.97);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 4px 20px rgba(13, 32, 22, 0.06);
@@ -49,6 +49,7 @@
   display: flex;
   gap: 2rem;
   align-items: center;
+  margin-left: auto; /* pushes the links to the right on desktop */
 }
 
 .navbar-links a {
@@ -67,8 +68,11 @@
   display: none;
 }
 
+/* Desktop: the actions box only held the Let's Talk button and the (hidden)
+   hamburger, so it is hidden too. Otherwise it sits there empty and its gap
+   keeps the links away from the right edge. It comes back on mobile below. */
 .navbar-actions {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 1rem;
 }
@@ -125,6 +129,9 @@
   }
   .navbar.scrolled {
     padding: 0.8rem 1rem;
+  }
+  .navbar-actions {
+    display: flex;
   }
   .btn-primary-nav {
     display: none;
