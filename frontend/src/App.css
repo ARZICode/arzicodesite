@@ -68,3 +68,21 @@
     font-size: 1rem;
   }
 }
+/* ==================== ARZICode.lb APP-LEVEL STYLES ====================
+   Every section is styled by its own component CSS file, and the shared
+   section layout (.section-container, .section-header) lives in index.css. */
+
+
+.arzicode-app {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
