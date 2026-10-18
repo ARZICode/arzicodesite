@@ -9,6 +9,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import AdminLogin from './components/AdminLogin';
 import AdminDashboard from './components/AdminDashboard';
+import { Analytics } from "@vercel/analytics/react"; // <-- Fixed import path for React
 
 export default function App() {
   const [isAdminRoute, setIsAdminRoute] = useState(window.location.hash === '#admin');
@@ -24,9 +25,19 @@ export default function App() {
 
   if (isAdminRoute) {
     if (!isAuthenticated) {
-      return <AdminLogin onLoginSuccess={() => setIsAuthenticated(true)} />;
+      return (
+        <>
+          <AdminLogin onLoginSuccess={() => setIsAuthenticated(true)} />
+          <Analytics /> {/* Optional: include here too if you want analytics on admin login */}
+        </>
+      );
     }
-    return <AdminDashboard onLogout={() => { localStorage.removeItem('arzicode_token'); setIsAuthenticated(false); window.location.hash = ''; }} />;
+    return (
+      <>
+        <AdminDashboard onLogout={() => { localStorage.removeItem('arzicode_token'); setIsAuthenticated(false); window.location.hash = ''; }} />
+        <Analytics />
+      </>
+    );
   }
 
   return (
@@ -41,6 +52,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <Analytics /> {/* Placed safely inside the main layout wrapper */}
     </div>
   );
 }
