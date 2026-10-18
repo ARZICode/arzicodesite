@@ -13,6 +13,7 @@
 
 .reviews-marquee-container {
   width: 100%;
+  max-width: 100%;
   overflow: hidden;
   position: relative;
   display: flex;
@@ -41,10 +42,15 @@
 }
 
 .reviews-track {
+  --gap: 2rem;
   display: flex;
-  gap: 2rem;
+  gap: var(--gap);
   width: max-content;
+  /* Trailing padding equals the gap, so the -50% shift lands exactly on the
+     start of the second copy and the loop has no visible jump */
+  padding-right: var(--gap);
   animation: scrollMarquee 35s linear infinite;
+  will-change: transform;
 }
 
 .reviews-track:hover {
@@ -62,7 +68,7 @@
 
 .review-card {
   width: 380px;
-  flex-shrink: 0;
+  flex: 0 0 auto;
   background-color: var(--color-light-sage);
   padding: 2.5rem;
   border-radius: 16px;
@@ -88,6 +94,7 @@
   line-height: 1.7;
   font-style: italic;
   flex-grow: 1;
+  overflow-wrap: break-word;
 }
 
 .review-author h4 {
@@ -109,5 +116,41 @@
   }
   .reviews-track {
     animation-duration: 25s;
+  }
+}
+
+@media (max-width: 600px) {
+  .reviews-section {
+    padding: 4rem 0;
+  }
+  .reviews-section .section-container {
+    padding: 0 1.25rem;
+    margin-bottom: 2rem;
+  }
+  .reviews-track {
+    --gap: 1.25rem;
+  }
+  .review-card {
+    width: min(280px, 80vw);
+    padding: 1.75rem 1.5rem;
+  }
+  .review-text {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  /* Narrower fade so it doesn't wash out most of a phone-sized card */
+  .reviews-marquee-container::before,
+  .reviews-marquee-container::after {
+    width: 28px;
+  }
+}
+
+/* Users who turned off animations get a swipeable row instead */
+@media (prefers-reduced-motion: reduce) {
+  .reviews-marquee-container {
+    overflow-x: auto;
+  }
+  .reviews-track {
+    animation: none;
   }
 }

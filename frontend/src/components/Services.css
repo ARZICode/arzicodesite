@@ -7,8 +7,14 @@
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  /* min(100%, 320px) is the fix: a plain minmax(320px, 1fr) is wider than the
+     content area on most phones and pushes the whole page sideways */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 2.5rem;
+}
+
+.services-grid > * {
+  min-width: 0;
 }
 
 .service-card {
@@ -33,6 +39,7 @@
   overflow: hidden;
   background: var(--color-muted-sage);
 }
+
 .service-card-image {
   width: 100%;
   height: 180px;
@@ -40,10 +47,12 @@
   border-radius: 8px 8px 0 0;
   margin-bottom: 1rem;
 }
+
 .service-image-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
   transition: transform 0.5s ease;
 }
 
@@ -56,6 +65,7 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  min-width: 0;
 }
 
 .service-badge {
@@ -69,6 +79,7 @@
   text-transform: uppercase;
   margin-bottom: 1rem;
   width: fit-content;
+  max-width: 100%;
 }
 
 .service-content h3 {
@@ -76,6 +87,7 @@
   font-weight: 700;
   color: var(--color-deep-forest);
   margin-bottom: 0.8rem;
+  overflow-wrap: break-word;
 }
 
 .service-desc {
@@ -84,6 +96,7 @@
   opacity: 0.85;
   margin-bottom: 1.5rem;
   line-height: 1.6;
+  overflow-wrap: break-word;
 }
 
 .service-price {
@@ -117,6 +130,8 @@
   padding: 0.2rem 0.6rem;
   border-radius: 4px;
   font-size: 0.8rem;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .service-footer {
@@ -136,6 +151,7 @@
   color: var(--color-forest);
 }
 
+/* Shared loading / error / empty states (also used by CaseStudies and Reviews) */
 .status-container, .error-container, .empty-container {
   text-align: center;
   padding: 3rem;
@@ -165,4 +181,19 @@
   cursor: pointer;
   margin-top: 1rem;
   font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .services-section {
+    padding: 4rem 1.25rem;
+  }
+  .services-grid {
+    gap: 1.75rem;
+  }
+  .service-content {
+    padding: 1.5rem;
+  }
+  .status-container, .error-container, .empty-container {
+    padding: 2rem 0;
+  }
 }

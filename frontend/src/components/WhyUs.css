@@ -1,36 +1,19 @@
+/* .section-container and .section-header now live in App.css */
+
 .why-us-section {
   padding: 6rem 2rem;
   background-color: var(--color-light-sage);
 }
 
-.section-container {
-  max-width: 1280px;
-  margin: 0 auto;
-}
-
-.section-header {
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto 4rem auto;
-}
-
-.section-header h2 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: var(--color-deep-forest);
-  margin-bottom: 1rem;
-  letter-spacing: -0.5px;
-}
-
-.section-header p {
-  color: var(--color-forest);
-  font-size: 1.1rem;
-}
-
 .benefits-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  /* min(100%, 260px) keeps the column from ever being wider than the screen */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
   gap: 2rem;
+}
+
+.benefits-grid > * {
+  min-width: 0;
 }
 
 .benefit-card {
@@ -55,6 +38,8 @@
   background: rgba(167, 191, 166, 0.2);
   padding: 12px;
   border-radius: 12px;
+  color: var(--color-cedar);
+  line-height: 0;
 }
 
 .benefit-card h3 {
@@ -69,4 +54,16 @@
   color: var(--color-almost-black);
   opacity: 0.8;
   line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+  .why-us-section {
+    padding: 4rem 1.25rem;
+  }
+  .benefits-grid {
+    gap: 1.25rem;
+  }
+  .benefit-card {
+    padding: 2rem 1.5rem;
+  }
 }

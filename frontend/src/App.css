@@ -1,55 +1,70 @@
+/* ==================== ARZICode.lb SHARED STYLES ====================
+   Every section (Navbar, Hero, WhyUs, Services, CaseStudies, Reviews,
+   Contact, Footer) is styled by its own component CSS file. The old
+   duplicate section rules were removed from here because they conflicted
+   with those files. Only shared tokens and shared layout helpers remain. */
+
 :root {
-  --color-light-sage: #E2EAD6;
-  --color-muted-sage: #A7BFA6;
-  --color-cedar: #4F7A5B;
-  --color-forest: #2E5B3F;
-  --color-deep-forest: #1B3D2A;
-  --color-almost-black: #0D2016;
-  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --sage-cream: #E2EAD6;
+  --muted-sage: #A7BFA6;
+  --cedar-green: #4F7A5B;
+  --forest-green: #2E5B3F;
+  --deep-forest: #1B3D2A;
+  --almost-black: #0D2016;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-}
-
-body {
-  font-family: var(--font-main);
-  background-color: var(--color-light-sage);
-  color: var(--color-almost-black);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  min-width: 320px;
-  /* Only on body (not html): stops sideways scroll without breaking mobile viewport sizing */
+/* APP WRAPPER */
+.arzicode-app {
+  width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
   overflow-x: clip;
 }
 
-img, svg, canvas, video {
-  max-width: 100%;
+/* SHARED CONTAINERS */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
 }
 
-button, input, textarea {
-  font-family: inherit;
+.section-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+/* SHARED SECTION HEADER (used by WhyUs, Services, CaseStudies, Reviews) */
+.section-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 4rem auto;
 }
 
-ul {
-  list-style: none;
+.section-header h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--color-deep-forest);
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  overflow-wrap: break-word;
 }
 
-/* Anchor links should not hide under the fixed navbar */
-section[id] {
-  scroll-margin-top: 70px;
+.section-header p {
+  color: var(--color-forest);
+  font-size: 1.1rem;
+}
+
+@media (max-width: 600px) {
+  .section-header {
+    margin-bottom: 2.5rem;
+  }
+  .section-header h2 {
+    font-size: 1.85rem;
+  }
+  .section-header p {
+    font-size: 1rem;
+  }
 }
